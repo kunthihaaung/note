@@ -1,4 +1,22 @@
 ```swift
+/// UIViewController custom transition.
+extension KanjiListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        QuizViewControllerTransition(originalFrame: selectedFrame, .present, vocab: vocabForTransition)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        QuizViewControllerTransition(originalFrame: selectedFrame, .dismiss, vocab: vocabForTransition)
+    }
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        QuizPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+```
+
+```swift
 import UIKit
 
 class QuizViewControllerTransition: NSObject, UIViewControllerAnimatedTransitioning {
