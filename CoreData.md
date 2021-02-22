@@ -1,3 +1,34 @@
+Entity
+
+```swift
+extension NSPersistentContainer {
+    var productEntityName: String {
+        "ProductEntity"
+    }
+    
+    var productCategoryEntityName: String {
+        "ProductCategoryEntity"
+    }
+}
+```
+
+Base View Model
+```swift
+class BaseVM: NSObject {
+    var container: NSPersistentContainer {
+        let _container = NSPersistentContainer(name: "ShoppiModel")
+        _container.loadPersistentStores { description, error in
+            if let error = error {
+                fatalError("Unable to load quiz stores: \(error)")
+            }
+        }
+        
+        return _container
+    }
+}
+```
+
+
 ```swift
 import CoreData
 
